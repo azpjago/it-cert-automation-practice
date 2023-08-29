@@ -3,6 +3,9 @@
 import re
 
 def validate_user(username, minlen):
+    first_char = username[0]
+    if first_char in forbidden_characters:
+        return False
     """Checks if the received username matches the required conditions."""
     if type(username) != str:
         raise TypeError("username must be a string")
@@ -20,5 +23,9 @@ def validate_user(username, minlen):
         return False
     return True
 
-
+forbidden_characters = ['_','.']
+print(validate_user("blue.kale", 3)) # True
+print(validate_user(".blue.kale", 3)) # Currently True, should be False
+print(validate_user("red_quinoa", 4)) # True
+print(validate_user("_red_quinoa", 4)) # Currently True, should be False
 
